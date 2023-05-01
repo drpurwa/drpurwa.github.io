@@ -5368,15 +5368,16 @@ button.close {
 }
 
 .modal-content {
-  position: relative;
-  background-color: #fff;
-  border: 1px solid #999;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
-  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
-  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
-  background-clip: padding-box;
-  outline: 0;
+    position: relative;
+    background-color: peachpuff;
+    border: 1px solid #999;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    background-clip: padding-box;
+    outline: 0;
+    transform: translate(0%, 50%);
 }
 
 .modal-backdrop {
@@ -5398,10 +5399,10 @@ button.close {
 }
 
 .modal-header {
-  padding: 15px;
-  border-bottom: 1px dashed #e5e5e5;
-  min-height: 16.42857px;
-  text-align:center
+    padding: 15px;
+    border-bottom: 2px dashed #f14e95;
+    min-height: 16.42857px;
+    text-align: center
 }
 
 .modal-header .close {
@@ -5417,14 +5418,14 @@ button.close {
   position: relative;
   padding: 15px;
   text-align:center;
-  background-color:peachpuff;
+  
 }
 
 .modal-footer {
-  padding: 15px;
-  text-align: center;
-  border-top: 1px solid #e5e5e5;
-
+    padding: 15px;
+    text-align: center;
+    
+   
 }
 .modal-footer:before, .modal-footer:after {
   content: " ";
