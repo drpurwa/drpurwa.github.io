@@ -491,7 +491,7 @@ figure {
 
 #fh5co-counter .event-wrap h3,
 #fh5co-event .event-wrap h3 {
-  font-size: 20px;
+  font-size: 24px;
   color: #fff;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   display: block;
@@ -506,6 +506,7 @@ figure {
 #fh5co-event .event-wrap span {
   display: block;
   color: rgba(255, 255, 255, 0.8);
+  font-size: 24px;
 }
 
 #fh5co-counter .event-wrap i,
@@ -2182,15 +2183,14 @@ html {
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   color: #000;
+  font-size: 13px;
+  font-weight: bold;
 }
 
 .audio-player:hover {
-  background-color:whitesmoke;
+  background-color:peachpuff;
 }
 
-.audio-player i {
-  font-size: 24px;
-}
 
 
 /*# sourceMappingURL=style.css.map */
