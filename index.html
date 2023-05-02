@@ -656,6 +656,18 @@
 		});
 	</script>
 	<script>
+	$(document).ready(function() {
+	// Get the value of the 'untuk' parameter from the URL
+	var urlParams = new URLSearchParams(window.location.search);
+	var untukParam = urlParams.get('untuk');
+
+	// Set the modal title using the 'untuk' parameter value
+	$('#NamaUndangan').text(untukParam ? untukParam:"Tamu Undangan Yang Kami Hormati" );
+	});
+
+	</script>
+
+	<script>
     var d = new Date(new Date().getTime() + 200 * 120 * 120 * 2000);
 
     // default example
