@@ -78,7 +78,7 @@
 					
 					</div>
 					<div class="modal-footer" >
-						<button type="button" class="btn btn-default" data-dismiss="modal">BUKA UNDANGAN</button>
+						<button id="BukaUndangan" type="button" class="btn btn-default" data-dismiss="modal">BUKA UNDANGAN</button>
 					</div>
 				</div>
 
@@ -89,7 +89,9 @@
 		
 
 
-	<div>
+	<!-- ini contoh on clik web play audio
+		
+		<div>
 		<script>
 			window.addEventListener("click", onclick => {
 		  const audio = document.querySelector("audio");
@@ -103,17 +105,54 @@
 		</audio>
 
 	</div>
+ -->
+<div>
+	<div>
+	<audio id="bgmusic">
+		<source src="images/Marryme.mp3" type="audio/mpeg">
+	</audio>
+		<button class="audio-player" id="play-pause-btn">Play</button>
+  	</div>
+  
+  <script>
+	const audio = document.getElementById("bgmusic");
+	const playPauseBtn = document.getElementById("play-pause-btn");
+	const BukaUndangan = document.getElementById("BukaUndangan");
+	playPauseBtn.addEventListener("click", () => {
+	  if (audio.paused) {
+		audio.volume = 0.5;
+		audio.play();
+		playPauseBtn.textContent = "Pause";
+	  } else {
+		audio.pause();
+		playPauseBtn.textContent = "Play";
+	  }
+	});
+	BukaUndangan.addEventListener("click", () => {
+	  if (audio.paused) {
+		audio.volume = 0.5;
+		audio.play();
+		playPauseBtn.textContent = "Pause";
+	  } else {
+		audio.pause();
+		playPauseBtn.textContent = "Play";
+	  }
+	
+	});
+  </script>
+
+</div>
+
 	<div id="page">
 	<nav class="fh5co-nav" role="navigation">
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-2">
 					<div id="fh5co-logo">
-						<!--<a href="index.html">Pawiwahan<strong>.</strong></a>-->
-						<img src="images/Logo.png" alt="Logo" />				
+						<img src="images/Logo.png" alt="Logo" href="#" />				
 					</div>
-
 				</div>
+				
 				<!--<div class="col-xs-10 text-right menu-1">
 					<ul>
 						<li class="active"><a href="index.html">Home</a></li>
@@ -623,9 +662,12 @@
 	</footer>
 	</div>
 
-	<div class="gototop js-top">
+	<!-- ini adalah kursor goto
+		
+		<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
-	</div>
+	</div> 
+-->
 	
 	<!-- jQuery -->
 	<script src="js/jquery.min.js">Array</script>
@@ -688,4 +730,3 @@
 
 	</body>
 </html>
-
