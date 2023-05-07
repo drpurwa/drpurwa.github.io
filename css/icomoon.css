@@ -182,9 +182,13 @@
 }
 .icon-play:before {
   content: "\e052";
+  font-size: 2.5em;
+  color:brown
 }
 .icon-pause:before {
   content: "\e053";
+  font-size: 2.5em;
+  color:brown
 }
 .icon-stop:before {
   content: "\e054";
@@ -1112,6 +1116,8 @@
 }
 .icon-music:before {
   content: "\e9e8";
+  font-size: 2.5em;
+  color: brown;
 }
 .icon-network:before {
   content: "\e9e9";

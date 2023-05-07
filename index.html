@@ -112,7 +112,7 @@
 	<audio id="bgmusic">
 		<source src="images/Marryme.mp3" type="audio/mpeg">
 	</audio>
-		<button class="audio-player" id="play-pause-btn">Play</button>
+		<button class="audio-player" id="play-pause-btn" ><span class="icon-music"></span></button>
   	</div>
   
   <script>
@@ -123,20 +123,20 @@
 	  if (audio.paused) {
 		audio.volume = 0.5;
 		audio.play();
-		playPauseBtn.textContent = "Pause";
+		playPauseBtn.innerHTML = "<icomoon class='icon-pause'></icomoon>";
 	  } else {
 		audio.pause();
-		playPauseBtn.textContent = "Play";
+		playPauseBtn.innerHTML = "<icomoon class='icon-play'></icomoon>";
 	  }
 	});
 	BukaUndangan.addEventListener("click", () => {
 	  if (audio.paused) {
 		audio.volume = 0.5;
 		audio.play();
-		playPauseBtn.textContent = "Pause";
+		playPauseBtn.innerHTML = "<icomoon class='icon-pause'></icomoon>";
 	  } else {
 		audio.pause();
-		playPauseBtn.textContent = "Play";
+		playPauseBtn.innerHTML = "<icomoon class='icon-play'></icomoon>";
 	  }
 	
 	});
