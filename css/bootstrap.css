@@ -2632,6 +2632,12 @@ a.btn.disabled, fieldset[disabled] a.btn {
   color: darkgoldenrod;
   background-color: #fff;
   border-color: #ccc;
+} 
+.btn-default2 {
+  color: red;
+  background-color: peachpuff;
+  border-color: #ccc;
+
 }
 .btn-default:focus, .btn-default.focus {
   color: #333;
@@ -5348,12 +5354,22 @@ button.close {
   -moz-transition: -moz-transform 0.3s ease-out;
   -o-transition: -o-transform 0.3s ease-out;
   transition: transform 0.3s ease-out;
+    background-image: url(/images/modal.jpg);
+    background-size:cover;
+    background-position: center;
+
+    
 }
 .modal.in .modal-dialog {
   -webkit-transform: translate(0, 0);
   -ms-transform: translate(0, 0);
   -o-transform: translate(0, 0);
   transform: translate(0, 0);
+  background-image: url(/images/modal.jpg);
+  background-size:cover;
+  background-position: center;
+
+  
 }
 
 .modal-open .modal {
@@ -5367,11 +5383,15 @@ button.close {
   height: 100%;
   margin: 0;
   background-color: peachpuff;
+
 }
 
 .modal-content {
     position: relative;
-    background-color: peachpuff;
+    background-color: rgba(255, 255, 255, 0.50);
+    height: 100%;
+  
+
     /* border: 1px solid #999; */
     /* border: 1px solid rgba(0, 0, 0, 0.2); */
     /* border-radius: 20px; */
