@@ -384,7 +384,7 @@ figure {
 
   .fh5co-cover .display-t,
   .fh5co-cover .display-tc {
-    height: 600px;
+    height: 800px;
   }
 }
 
@@ -946,7 +946,7 @@ form label {
 .fh5co-cover .display-tc {
   display: table-cell !important;
   vertical-align:bottom;
-  padding-bottom: 20px;
+
 }
 
 #fh5co-header .display-tc h1,
@@ -992,7 +992,7 @@ form label {
 #fh5co-header .display-tc h2,
 #fh5co-counter .display-tc h2,
 .fh5co-cover .display-tc h2 {
-  font-size: 100px;
+  font-size:60px;
   line-height: 1.5;
   margin-bottom: 10px;
   font-family: "Sacramento", Arial, serif;
