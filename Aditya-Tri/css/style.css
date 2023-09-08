@@ -945,7 +945,7 @@ form label {
 #fh5co-counter .display-tc,
 .fh5co-cover .display-tc {
   display: table-cell !important;
-  vertical-align:bottom;
+  vertical-align:middle;
 
 }
 
