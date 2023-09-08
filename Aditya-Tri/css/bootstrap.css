@@ -153,7 +153,6 @@ button,
 html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
-  -webkit-appearance: button;
   cursor: pointer;
 }
 
@@ -184,7 +183,6 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 input[type="search"] {
-  -webkit-appearance: textfield;
   box-sizing: content-box;
 }
 
@@ -2110,10 +2108,6 @@ output {
 
 textarea.form-control {
   height: auto;
-}
-
-input[type="search"] {
-  -webkit-appearance: none;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
@@ -5326,7 +5320,6 @@ button.close {
   cursor: pointer;
   background: transparent;
   border: 0;
-  -webkit-appearance: none;
 }
 
 .modal-open {
@@ -5354,7 +5347,7 @@ button.close {
   -moz-transition: -moz-transform 0.3s ease-out;
   -o-transition: -o-transform 0.3s ease-out;
   transition: transform 0.3s ease-out;
-    background-image: url(/images/modal.jpg);
+    background-image: url(/aditya-tri/images/img_bg_3.jpg);
     background-size:cover;
     background-position: center;
 
@@ -5365,7 +5358,7 @@ button.close {
   -ms-transform: translate(0, 0);
   -o-transform: translate(0, 0);
   transform: translate(0, 0);
-  background-image: url(/images/modal.jpg);
+  background-image: url(/aditya-tri/images/img_bg_3.jpg);
   background-size:cover;
   background-position: center;
 
