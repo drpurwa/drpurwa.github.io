@@ -5347,7 +5347,6 @@ button.close {
   -moz-transition: -moz-transform 0.3s ease-out;
   -o-transition: -o-transform 0.3s ease-out;
   transition: transform 0.3s ease-out;
-    background-image: url(/aditya-tri/images/img_bg_3.jpg);
     background-size:cover;
     background-position: center;
 
@@ -5358,7 +5357,6 @@ button.close {
   -ms-transform: translate(0, 0);
   -o-transform: translate(0, 0);
   transform: translate(0, 0);
-  background-image: url(/aditya-tri/images/img_bg_3.jpg);
   background-size:cover;
   background-position: center;
 
