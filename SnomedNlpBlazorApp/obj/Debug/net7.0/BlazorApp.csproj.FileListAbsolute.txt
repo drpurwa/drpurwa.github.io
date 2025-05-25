@@ -1,0 +1,14 @@
+/workspaces/drpurwa.github.io/BlazorApp/obj/Debug/net7.0/BlazorApp.csproj.AssemblyReference.cache
+/workspaces/drpurwa.github.io/BlazorApp/obj/Debug/net7.0/BlazorApp.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/drpurwa.github.io/BlazorApp/obj/Debug/net7.0/BlazorApp.AssemblyInfoInputs.cache
+/workspaces/drpurwa.github.io/BlazorApp/obj/Debug/net7.0/BlazorApp.AssemblyInfo.cs
+/workspaces/drpurwa.github.io/BlazorApp/obj/Debug/net7.0/BlazorApp.csproj.CoreCompileInputs.cache
+/workspaces/drpurwa.github.io/BlazorApp/obj/Debug/net7.0/BlazorApp.MvcApplicationPartsAssemblyInfo.cache
+/workspaces/drpurwa.github.io/BlazorApp/obj/Debug/net7.0/BlazorApp.sourcelink.json
+/workspaces/drpurwa.github.io/SnomedNlpBlazorApp/obj/Debug/net7.0/BlazorApp.csproj.AssemblyReference.cache
+/workspaces/drpurwa.github.io/SnomedNlpBlazorApp/obj/Debug/net7.0/BlazorApp.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/drpurwa.github.io/SnomedNlpBlazorApp/obj/Debug/net7.0/BlazorApp.AssemblyInfoInputs.cache
+/workspaces/drpurwa.github.io/SnomedNlpBlazorApp/obj/Debug/net7.0/BlazorApp.AssemblyInfo.cs
+/workspaces/drpurwa.github.io/SnomedNlpBlazorApp/obj/Debug/net7.0/BlazorApp.csproj.CoreCompileInputs.cache
+/workspaces/drpurwa.github.io/SnomedNlpBlazorApp/obj/Debug/net7.0/BlazorApp.MvcApplicationPartsAssemblyInfo.cache
+/workspaces/drpurwa.github.io/SnomedNlpBlazorApp/obj/Debug/net7.0/BlazorApp.sourcelink.json
