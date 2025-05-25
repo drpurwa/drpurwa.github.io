@@ -1,12 +1,25 @@
-﻿<Router AppAssembly="@typeof(App).Assembly">
+﻿<Router AppAssembly="@typeof(Program).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
         <FocusOnNavigate RouteData="@routeData" Selector="h1" />
     </Found>
     <NotFound>
-        <PageTitle>Not found</PageTitle>
+        <PageTitle>Tidak Ditemukan</PageTitle>
         <LayoutView Layout="@typeof(MainLayout)">
-            <p role="alert">Sorry, there's nothing at this address.</p>
+            <p role="alert">Maaf, tidak ada di alamat ini.</p>
         </LayoutView>
     </NotFound>
 </Router>
+
+@code {
+    // A minimal MainLayout is needed if not already present in Shared folder.
+    // For a simple single-page app, you can create Shared/MainLayout.razor:
+    // @inherits LayoutComponentBase
+    // <div class="page">
+    //     <main>
+    //         <article class="content px-4">
+    //             @Body
+    //         </article>
+    //     </main>
+    // </div>
+}

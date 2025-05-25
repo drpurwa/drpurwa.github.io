@@ -1,9 +1,148 @@
 ﻿@page "/"
+@inject GeminiService GeminiService
+@inject IJSRuntime JSRuntime
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Ekstraksi SNOMED CT</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="min-h-screen bg-gray-100 p-4 flex items-center justify-center font-sans">
+    <div class="bg-white rounded-xl shadow-lg p-6 w-full max-w-4xl flex flex-col">
+        <h1 class="text-2xl font-bold text-gray-800 mb-4 text-center">Sistem Pakar Terminologi Medis: Ekstraksi SNOMED CT</h1>
+        
+        <div class="mb-4">
+            <label for="clinicalText" class="block text-gray-700 text-sm font-bold mb-2">Narasi Klinis (Bahasa Indonesia)</label>
+            <textarea id="clinicalText" @bind="ClinicalText"
+                      class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-y min-h-[120px]"
+                      rows="5" placeholder="Masukkan teks klinis di sini..."></textarea>
+        </div>
 
-Welcome to your new app.
+        <div class="flex items-center justify-between mb-6">
+            <button @onclick="ProcessNarrative"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300 ease-in-out shadow-md"
+                    disabled="@LoadingNlp">
+                @if (LoadingNlp)
+                {
+                    <span>Memproses...</span>
+                }
+                else
+                {
+                    <span>Proses Narasi</span>
+                }
+            </button>
+            <span class="@(Status.StartsWith("Error:") ? "text-red-600" : "text-green-600") ml-4 text-sm italic">
+                @Status
+            </span>
+        </div>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+        @if (LoadingNlp)
+        {
+            <div class="flex justify-center my-4">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+            </div>
+        }
+
+        @if (Entities.Any() && !LoadingNlp)
+        {
+            <h2 class="text-xl font-semibold text-gray-800 mb-3">Hasil Ekstraksi</h2>
+            
+            <div class="overflow-x-auto mb-6 rounded-lg shadow-md border border-gray-200">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Teks Asli</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Istilah Pilihan</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategori Semantik</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Skor Kepercayaan</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Konteks</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lateralitas</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tingkat Keparahan</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kode SNOMED CT</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        @foreach (var entity in Entities)
+                        {
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">@entity.Text</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">@entity.PreferredTerm</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">@entity.SemanticCategory</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">@entity.ConfidenceScore</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">@entity.Context</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">@entity.Laterality</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">@entity.Severity</td>
+                                <td class="px-6 py-4 text-sm text-gray-900 break-words max-w-xs">@entity.SnomedCode</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else if (!LoadingNlp && !string.IsNullOrEmpty(Status) && !Status.StartsWith("Error:"))
+        {
+            <p class="text-gray-500 mt-4 text-center">Tidak ada entitas yang diekstrak atau dipetakan.</p>
+        }
+
+        <hr class="my-6 border-gray-300" />
+
+        <div class="info-container text-gray-700">
+            <h2 class="text-xl font-semibold mb-2">Metodologi</h2>
+            <p class="mb-2">Aplikasi web ini berfungsi sebagai sistem pakar terminologi medis, menggunakan Gemini API untuk langsung mengekstrak konsep klinis dari narasi berbahasa Indonesia dan memetakannya ke kode serta istilah SNOMED CT yang sesuai.</p>
+            <p>Sistem ini berfokus pada identifikasi diagnosis/kondisi, gejala dan temuan klinis, prosedur, entitas yang dapat diamati, dan medikasi, dengan tujuan mempertahankan akurasi klinis dan mengutamakan spesifisitas.</p>
+            <p class="text-xs text-gray-500 mt-4">Catatan: Ini adalah alat demonstrasi. Akurasi pemetaan SNOMED CT sepenuhnya bergantung pada kemampuan model Gemini. Selalu verifikasi informasi klinis dengan sumber daya medis yang sesuai.</p>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string ClinicalText { get; set; } = "Pasien perempuan 73 tahun dibawa keluarga dengan keluhan mendadak lemah pada separuh tubuh kanan sejak 2 jam yang lalu. Pasien juga mengalami kesulitan berbicara. Riwayat hipertensi dan fibrilasi atrial.";
+    private bool LoadingNlp { get; set; } = false;
+    private string Status { get; set; } = "";
+    private List<ExtractedEntity> Entities { get; set; } = new List<ExtractedEntity>();
+
+    private async Task ProcessNarrative()
+    {
+        if (string.IsNullOrWhiteSpace(ClinicalText))
+        {
+            Status = "Error: Harap masukkan narasi klinis.";
+            return;
+        }
+
+        LoadingNlp = true;
+        Status = "Menganalisis narasi klinis dengan Gemini AI...";
+        Entities = new List<ExtractedEntity>(); // Clear previous results
+
+        var startTime = DateTime.UtcNow; // Start timing
+
+        try
+        {
+            var geminiResponse = await GeminiService.ExtractEntities(ClinicalText);
+            var endTime = DateTime.UtcNow; // End timing
+            var duration = (endTime - startTime).TotalMilliseconds; // Calculate duration
+
+            if (geminiResponse != null && geminiResponse.Any())
+            {
+                // Filter out entities without a SNOMED code or empty code, and remove duplicates based on text
+                var finalEntities = geminiResponse
+                    .Where(e => !string.IsNullOrWhiteSpace(e.SnomedCode) && e.SnomedCode != "N/A")
+                    .GroupBy(e => e.Text)
+                    .Select(g => g.First())
+                    .ToList();
+
+                Entities = finalEntities;
+                Status = $"Berhasil mengekstrak {Entities.Count} entitas klinis. Waktu proses: {duration:F2} ms.";
+            }
+            else
+            {
+                Status = "Tidak ada entitas yang diekstrak oleh Gemini API.";
+            }
+        }
+        catch (Exception ex)
+        {
+            Status = $"Error: {ex.Message}";
+            Console.WriteLine($"Error during NLP processing: {ex.Message}");
+        }
+        finally
+        {
+            LoadingNlp = false;
+        }
+    }
+}
