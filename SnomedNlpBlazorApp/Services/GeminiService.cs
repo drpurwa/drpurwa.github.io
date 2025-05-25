@@ -12,7 +12,7 @@ namespace SnomedNlpBlazorApp.Services
         private readonly HttpClient _httpClient;
         // IMPORTANT: For client-side Blazor WebAssembly, this API key will be visible in browser's dev tools.
         // For production, use a backend proxy to protect your API key.
-        private readonly string _apiKey = "AIzaSyBYhR4FDVcDh26e6cgFKBQFP6F0RdiDnJg"; // REPLACE WITH YOUR ACTUAL GEMINI API KEY
+        private readonly string _apiKey = ""; // REPLACE WITH YOUR ACTUAL GEMINI API KEY
 
         public GeminiService(HttpClient httpClient)
         {
