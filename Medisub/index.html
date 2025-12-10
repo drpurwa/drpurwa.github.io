@@ -910,6 +910,8 @@
         }
     </style>
 </head>
+
+    
 <body>
 
     <header class="navbar">
@@ -1399,5 +1401,43 @@
             });
         };
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+    // Init EmailJS
+    (function() {
+        emailjs.init("sH_rmD2e-MYY8McU-");
+    })();
+
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const button = this.querySelector("button");
+        button.disabled = true;
+        button.innerText = "Mengirim...";
+
+        const formData = {
+            nama: document.getElementById("nama").value,
+            email: document.getElementById("email").value,
+            hp: document.getElementById("hp").value,
+            pesan: document.getElementById("pesan").value
+        };
+
+        emailjs.send("service_4241die", "template_zrub0w8", formData)
+            .then(() => {
+                alert("Pesan berhasil dikirim! Terima kasih.");
+                document.getElementById("contactForm").reset();
+                button.disabled = false;
+                button.innerText = "Kirim Pesan";
+            })
+            .catch((error) => {
+                console.error("EmailJS Error:", error);
+                alert("Gagal mengirim pesan. Coba lagi dalam beberapa saat.");
+                button.disabled = false;
+                button.innerText = "Kirim Pesan";
+            });
+    });
+</script>
+
 </body>
 </html>
