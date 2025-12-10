@@ -339,7 +339,7 @@
         /* HOW IT WORKS */
         .steps-container {
             display: flex;
-            align-items: center;
+            align-items: stretch;
             justify-content: center;
             gap: 20px;
             flex-wrap: wrap;
@@ -352,8 +352,15 @@
             background: var(--white);
             border-radius: 15px;
             transition: transform 0.3s;
-            flex: 0 1 180px;
+            flex: 1 1 220px;
             box-shadow: var(--shadow);
+            text-align: center;
+            min-height: 280px; /* ⬅️ bikin semua card rata tinggi */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+
+            
         }
         .step-item:hover {
             transform: translateY(-5px);
@@ -389,9 +396,11 @@
         }
         .step-arrow {
             color: var(--primary);
+            align-items: center; 
             font-size: 2rem;
             flex: 0 0 auto;
             animation: slideRight 1.5s ease-in-out infinite;
+            
         }
         .step-arrow i {
             width: 64px;
