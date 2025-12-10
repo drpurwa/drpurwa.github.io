@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediSub - Your Medical Match!</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            color: var(--dark);
+            background-color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section { padding: 80px 0; }
+        .bg-light { background-color: var(--light); }
+
+        h1, h2, h3, h4 { line-height: 1.2; margin-bottom: 1rem; }
+        p { margin-bottom: 1rem; color: var(--gray); }
+        
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+        }
+        .section-header h2 {
+            font-size: 2.25rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        .section-header h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: none;
+        }
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+            border: 2px solid var(--primary);
+        }
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: var(--shadow);
+        }
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark);
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link:hover { color: var(--primary); }
+        .mobile-toggle { display: none; cursor: pointer; }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            padding: 100px 0;
+            background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+            overflow: hidden;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 50px;
+        }
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        .hero-text .highlight { color: var(--primary); }
+        .hero-text p { 
+            font-size: 1.15rem; 
+            margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+        .hero-btns { 
+            display: flex; 
+            gap: 15px;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+        }
+        
+        .hero-img-container {
+            position: relative;
+            animation: fadeInRight 0.8s ease-out 0.3s backwards;
+        }
+        .hero-img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            min-height: 400px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1e40af 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 20px;
+        }
+        .hero-img::after {
+            content: '🏥 Medical Platform';
+            opacity: 0.3;
+        }
+
+        /* FEATURES */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .feature-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .feature-card h3 {
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        /* ABOUT */
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .about-img {
+            width: 100%;
+            height: 450px;
+            background: linear-gradient(135deg, #06b6d4 0%, #0ea5e9 50%, #0284c7 100%);
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .about-img::after {
+            content: '💼 Healthcare Solutions';
+            opacity: 0.3;
+        }
+        .about-text h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        /* ECOSYSTEM */
+        .ecosystem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .eco-card {
+            background: var(--white);
+            padding: 35px 25px;
+            border-radius: 15px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+        .eco-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .eco-card h3 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        /* HOW IT WORKS */
+        .steps-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .step-item {
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--white);
+            border-radius: 15px;
+            transition: transform 0.3s;
+            flex: 0 1 180px;
+            box-shadow: var(--shadow);
+        }
+        .step-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .step-number {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 15px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        .step-icon-large {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+        .step-icon-large i {
+            width: 40px;
+            height: 40px;
+        }
+        .step-arrow {
+            color: var(--primary);
+            font-size: 2rem;
+            flex: 0 0 auto;
+            animation: slideRight 1.5s ease-in-out infinite;
+        }
+        .step-arrow i {
+            width: 32px;
+            height: 32px;
+        }
+        .step-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        @keyframes slideRight {
+            0%, 100% { transform: translateX(0); opacity: 0.6; }
+            50% { transform: translateX(10px); opacity: 1; }
+        }
+
+        /* TEAM */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+        }
+        .team-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .team-img {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6d28d9 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        .team-info {
+            padding: 20px;
+            text-align: center;
+        }
+        .team-info h3 {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+        .team-role {
+            color: var(--primary);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        /* BLOG */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .blog-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .blog-thumb {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            position: relative;
+        }
+        .blog-tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .blog-content {
+            padding: 25px;
+        }
+        .blog-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+        .blog-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .blog-content h3 {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        .blog-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        .blog-link:hover {
+            gap: 10px;
+        }
+
+        /* BLOG DETAIL */
+        .blog-detail {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+        .blog-header {
+            margin-bottom: 30px;
+        }
+        .blog-header h1 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin: 15px 0;
+        }
+        .blog-meta-detail {
+            display: flex;
+            gap: 20px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        .blog-meta-detail span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .blog-image-detail {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-lg);
+        }
+        .summary-box {
+            background: #eff6ff;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            margin-bottom: 30px;
+        }
+        .summary-box strong {
+            color: var(--primary);
+            display: block;
+            margin-bottom: 10px;
+        }
+        .blog-body {
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+        .blog-body h2 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin: 30px 0 15px;
+        }
+        .blog-body p {
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 500;
+            color: var(--dark);
+            border: 1px solid #e2e8f0;
+            padding: 8px 15px;
+            border-radius: 25px;
+        }
+        .back-link:hover {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+
+        /* FOOTER / CONTACT */
+        #footerContent {
+            background-color: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
+        }
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 50px;
+            align-items: flex-start;
+        }
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .contact-item i {
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+        .contact-item strong {
+            display: block;
+            margin-bottom: 3px;
+            color: var(--white);
+        }
+        .contact-item p {
+            color: #cbd5e1;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        
+        .contact-form-container {
+            background: #2d3748;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 1px solid #4a5568;
+            border-radius: 8px;
+            background-color: #1e293b;
+            color: white;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+        .contact-form textarea {
+            resize: vertical;
+        }
+        .contact-form input::placeholder, .contact-form textarea::placeholder {
+            color: #94a3b8;
+        }
+        .contact-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--accent);
+            color: var(--dark);
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .contact-form button:hover {
+            background-color: #d97706;
+            transform: translateY(-2px);
+        }
+
+        /* MODAL */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+        .modal-backdrop.show {
+            display: flex;
+        }
+        .modal-content {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        }
+        .modal-backdrop.show .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+        .modal-icon {
+            margin-bottom: 20px;
+        }
+        .modal-content h3 {
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+        .modal-content p {
+            color: var(--gray);
+            margin-bottom: 25px;
+        }
+        .modal-content button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        .modal-content button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            .hero-text h1 { font-size: 2.8rem; }
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-btns { justify-content: center; }
+            .about-layout { grid-template-columns: 1fr; }
+            .contact-wrapper { grid-template-columns: 1fr; }
+            .steps-container { flex-direction: column; }
+            .step-arrow { 
+                transform: rotate(90deg); 
+                animation: slideDown 1.5s ease-in-out infinite;
+            }
+        }
+        
+        @keyframes slideDown {
+            0%, 100% { transform: rotate(90deg) translateX(0); opacity: 0.6; }
+            50% { transform: rotate(90deg) translateX(10px); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 20px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                text-align: center;
+            }
+            .nav-menu.active { display: flex; }
+            .mobile-toggle { display: block; }
+            .hero-text h1 { font-size: 2rem; }
+            .blog-header h1 { font-size: 2rem; }
+            .blog-image-detail { height: 250px; }
+            .section-header h2 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container nav-content">
+            <a href="javascript:void(0)" onclick="showHomePage()" class="logo">
+                <i data-lucide="activity" color="#2563eb"></i> MediSub
+            </a>
+            
+            <a href="javascript:void(0)" id="backToHomeBtn" class="back-link" style="display:none;" onclick="showHomePage()">
+                <i data-lucide="arrow-left" size="18"></i> Kembali ke Beranda
+            </a>
+
+            <div class="mobile-toggle" onclick="toggleMenu()">
+                <i data-lucide="menu"></i>
+            </div>
+            <nav id="mainNav">
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="javascript:void(0)" class="nav-link" onclick="showHomePage(); scrollToSection('home')">Home</a></li>
+                    <li><a href="javascript:void(0)" class="nav-link" onclick="showHomePage(); scrollToSection('about')">Tentang</a></li>
+                    <li><a href="javascript:void(0)" class="nav-link" onclick="showHomePage(); scrollToSection('howitworks')">Cara Kerja</a></li>
+                    <li><a href="javascript:void(0)" class="nav-link" onclick="showHomePage(); scrollToSection('team')">Tim</a></li>
+                    <li><a href="javascript:void(0)" class="btn btn-primary" style="padding: 8px 20px; color: white;" onclick="showHomePage(); scrollToSection('contact')">Daftar</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="contentContainer"></main>
+
+    <footer id="footerContent">
+        <div class="container">
+            <div id="contact" class="contact-wrapper">
+                <div class="contact-info">
+                    <h3>Hubungi Kami</h3>
+                    <p style="margin-bottom: 25px;">Siap membantu kebutuhan SDM Kesehatan Anda. Isi formulir untuk memulai pendaftaran atau konsultasi.</p>
+                    
+                    <div class="contact-item">
+                        <i data-lucide="phone"></i>
+                        <div>
+                            <strong>Phone</strong>
+                            <p>+62 896-5220-0777</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i data-lucide="mail"></i>
+                        <div>
+                            <strong>Email</strong>
+                            <p>mail.medisub@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i data-lucide="map-pin"></i>
+                        <div>
+                            <strong>Address</strong>
+                            <p>Yogyakarta, Indonesia</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i data-lucide="instagram"></i>
+                        <div>
+                            <strong>Social Media</strong>
+                            <p>@medisub_id</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container">
+                    <form class="contact-form" id="contactForm">
+                        <h3 style="color:white; margin-bottom:15px; font-size:1.2rem;">Kirim Pesan / Mulai Pendaftaran</h3>
+                        <input type="text" placeholder="Nama Lengkap" required>
+                        <input type="email" placeholder="Email Anda" required>
+                        <input type="tel" placeholder="Nomor HP (cth: 08123xxxxxxx)" required>
+                        <textarea rows="4" placeholder="Ketik Pesan Anda di sini..." required></textarea>
+                        <button type="submit">Kirim Pesan</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div style="margin-top: 50px; border-top: 1px solid #334155; padding-top: 20px; text-align: center;">
+                <p style="color: #94a3b8;">&copy; 2025 MediSub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <div id="successModal" class="modal-backdrop">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i data-lucide="check-circle" color="#22c55e" size="64"></i>
+            </div>
+            <h3>Pesan Terkirim (Simulasi)</h3>
+            <p>Terima kasih! Kami telah menerima minat Anda. Tim MediSub akan segera menghubungi Anda melalui email atau telepon.</p>
+            <button onclick="closeModal()">Tutup</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script>
+        const blogData = {
+            'regulasi': {
+                title: "Pentingnya Regulatory Sandbox dalam Inovasi Kesehatan",
+                tag: "Regulasi",
+                date: "10 Des 2025",
+                summary: "Regulatory Sandbox adalah ruang aman yang disediakan pemerintah untuk menguji inovasi teknologi sebelum diterapkan secara luas. Ini penting bagi MediHub untuk memastikan bahwa solusi pencarian dokter pengganti beroperasi dengan aman, legal, dan terukur, sesuai dengan hukum yang berlaku di Indonesia.",
+                body: `<p>Dalam dunia kesehatan yang sangat diatur, inovasi digital seringkali menghadapi tantangan legalitas. Regulatory Sandbox hadir sebagai jembatan yang memungkinkan teknologi baru, seperti MediSub, diuji coba dalam lingkungan yang terkontrol.</p><h2>Keuntungan Regulatory Sandbox</h2><p>Bagi MediHub, partisipasi dalam Sandbox memastikan bahwa sistem verifikasi STR/SIP dan proses kontrak digital kami sah secara hukum. Ini memberikan kepercayaan tidak hanya kepada para profesional medis tetapi juga kepada Fasilitas Kesehatan (Faskes) yang menggunakan platform kami.</p><p>Tanpa Sandbox, penerapan teknologi yang sangat mengganggu (disruptive) seperti real-time matching dokter pengganti mungkin terhambat oleh peraturan lama. Kami bekerja sama erat dengan regulator untuk menciptakan standar baru bagi kualitas SDM kesehatan digital.</p><p>Ini adalah komitmen kami untuk tidak hanya menyediakan solusi yang cepat tetapi juga yang bertanggung jawab dan patuh pada peraturan.</p>`,
+                image: 'https://images.unsplash.com/photo-1576091160550-217358c7e618?auto=format&fit=crop&w=900&q=80'
+            },
+            'teknologi': {
+                title: "Masa Depan Telemedisin dan Dokter Pengganti",
+                tag: "Teknologi",
+                date: "08 Des 2025",
+                summary: "Integrasi teknologi cloud dan pemetaan real-time adalah kunci masa depan SDM kesehatan. Artikel ini membahas bagaimana MediSub memanfaatkan cloud computing untuk mengoptimalkan penempatan dokter pengganti dan mendukung perkembangan Telemedisin yang semakin maju.",
+                body: `<p>Telemedisin telah mengubah cara pasien menerima layanan. Namun, di balik layanan virtual yang mulus, ada kebutuhan infrastruktur SDM yang fleksibel. Di sinilah peran teknologi MediSub menjadi vital.</p><h2>Cloud Database dan Real-Time Mapping</h2><p>MediHub membangun cloud database terkait kompetensi, jumlah, dan lokasi dokter. Fitur ini memungkinkan Faskes untuk melihat ketersediaan dokter pengganti dalam hitungan detik, menghilangkan proses manual yang memakan waktu berhari-hari. Ini adalah langkah maju menuju manajemen SDM kesehatan yang efisien.</p><p>Selain itu, data yang terkumpul membantu kami mengidentifikasi kesenjangan tenaga medis antar daerah, yang dapat diatasi melalui pelatihan (MediCourse) dan inisiatif penempatan yang lebih strategis. Ini bukan hanya tentang menemukan pengganti, tetapi tentang mengoptimalkan ekosistem SDM secara keseluruhan.</p>`,
+                image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=80'
+            },
+            'karir': {
+                title: "Tips Sukses Menjadi Dokter Locum Terpercaya",
+                tag: "Karir",
+                date: "05 Des 2025",
+                summary: "Menjadi dokter locum (pengganti) yang sukses memerlukan lebih dari sekadar kompetensi klinis. Kami berikan tips membangun reputasi, mulai dari memanfaatkan sistem rating & review di MediSub hingga menjaga profesionalisme dalam kontrak kerja.",
+                body: `<p>Peran dokter locum menawarkan fleksibilitas karir yang menarik. Namun, karena sifatnya yang sementara, membangun kepercayaan dan reputasi sangatlah penting. Platform MediSub menyediakan alat untuk melakukan hal ini, yaitu sistem Rating & Review.</p><h2>Memanfaatkan Rating dan Review</h2><p>Setiap pekerjaan yang diselesaikan dengan baik akan menghasilkan feedback positif, yang secara langsung meningkatkan visibilitas profil Anda di mata Faskes. Pastikan Anda selalu: tepat waktu, komunikatif, dan mematuhi semua ketentuan dalam kontrak digital.</p><p>Selain itu, berinvestasi dalam pengembangan diri melalui MediCourse akan menambah kredensial Anda, membuat Anda menjadi kandidat yang lebih diminati. Kepercayaan adalah mata uang utama di MediSub.</p>`,
+                image: 'https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=900&q=80'
+            }
+        };
+
+        const contentContainer = document.getElementById('contentContainer');
+        const backToHomeBtn = document.getElementById('backToHomeBtn');
+        const mainNav = document.getElementById('mainNav');
+        const successModal = document.getElementById('successModal');
+        
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        function scrollToSection(id) {
+            setTimeout(() => {
+                const section = document.getElementById(id);
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 50);
+        }
+
+        function showModal() {
+            successModal.classList.add('show');
+        }
+
+        function closeModal() {
+            successModal.classList.remove('show');
+        }
+
+        function getHomePageTemplate() {
+            return `
+                <section id="home" class="hero">
+                    <div class="container hero-grid">
+                        <div class="hero-text">
+                            <h1>Platform to find quick & <span class="highlight">high-quality</span> substitute doctor.</h1>
+                            <p>Smart Digital Platform yang dirancang untuk menemukan dokter pengganti terverifikasi dengan cepat, efisien, dan akurat. "Your Medical Match!"</p>
+                            <div class="hero-btns">
+                                <a href="javascript:void(0)" class="btn btn-outline" onclick="scrollToSection('about')">Learn More</a>
+                                <a href="javascript:void(0)" class="btn btn-primary" onclick="scrollToSection('contact')">Registration Here <i data-lucide="arrow-right" size="18"></i></a>
+                            </div>
+                        </div>
+                        <div class="hero-img-container">
+                            <div class="hero-img"></div> 
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2>Solusi Masalah Anda</h2>
+                            <p>Mengatasi kesulitan mencari pengganti medis dalam waktu singkat dan minimnya transparansi.</p>
+                        </div>
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon"><i data-lucide="shield-check"></i></div>
+                                <h3>Trusted & Verified</h3>
+                                <p>Integrasi data STR/SIP memastikan setiap dokter legal. Sistem rating & review menjaga kepercayaan.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon"><i data-lucide="zap"></i></div>
+                                <h3>Real-time Matching</h3>
+                                <p>Database berbasis cloud untuk pemetaan tenaga medis secara real-time. Temukan pengganti instan.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon"><i data-lucide="file-check"></i></div>
+                                <h3>Transparansi Kontrak</h3>
+                                <p>Kejelasan honor, jadwal, dan kontrak kerja. Semua terproses otomatis dalam platform.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="about" class="section bg-light">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2>Tentang MediSub</h2>
+                            <p>Platform digital terpercaya untuk menemukan dokter pengganti berkualitas.</p>
+                        </div>
+                        <div class="about-layout">
+                            <div class="about-img"></div>
+                            <div class="about-text">
+                                <h2>Solusi Cepat & Terpercaya</h2>
+                                <p><strong>Platform Penghubung Profesional Medis untuk Jasa Pengganti.</strong></p>
+                                <p>MediSub adalah platform smart digital yang menghubungkan fasilitas kesehatan dengan dokter pengganti (locum) terverifikasi. Kami memastikan kontinuitas layanan kesehatan tetap berjalan optimal dengan proses yang cepat, aman, dan transparan.</p>
+                                <p>Dengan sistem credentialing otomatis dan verifikasi STR/SIP, kami menjamin setiap dokter dalam platform memenuhi standar profesional dan legalitas yang berlaku.</p>
+                                <div style="margin-top: 20px;">
+                                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                                        <i data-lucide="check-circle" color="green" size="18"></i> <span>Credentialing & Verifikasi Otomatis</span>
+                                    </div>
+                                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                                        <i data-lucide="check-circle" color="green" size="18"></i> <span>Regulatory Sandbox Compliant</span>
+                                    </div>
+                                    <div style="display:flex; align-items:center; gap:10px;">
+                                        <i data-lucide="check-circle" color="green" size="18"></i> <span>Real-time Matching & Transparent Contract</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="howitworks" class="section">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2>Cara Kerja MediSub</h2>
+                            <p>Proses mudah dan aman bagi Pencari Jasa (Faskes) dan Pemberi Jasa (Dokter).</p>
+                        </div>
+                        <div class="steps-container">
+                            <div class="step-item">
+                                <div class="step-number">1</div>
+                                <div class="step-icon-large"><i data-lucide="calendar-plus"></i></div>
+                                <h4>Request</h4>
+                                <p>Faskes membuat permintaan dokter pengganti. Dokter atur jadwal ketersediaan di platform.</p>
+                            </div>
+                            
+                            <div class="step-arrow">
+                                <i data-lucide="arrow-right"></i>
+                            </div>
+                            
+                            <div class="step-item">
+                                <div class="step-number">2</div>
+                                <div class="step-icon-large"><i data-lucide="search-check"></i></div>
+                                <h4>Matching</h4>
+                                <p>Sistem mencocokkan kualifikasi, lokasi, dan waktu secara otomatis dengan algoritma cerdas.</p>
+                            </div>
+                            
+                            <div class="step-arrow">
+                                <i data-lucide="arrow-right"></i>
+                            </div>
+                            
+                            <div class="step-item">
+                                <div class="step-number">3</div>
+                                <div class="step-icon-large"><i data-lucide="hand-coins"></i></div>
+                                <h4>Offer</h4>
+                                <p>Faskes pilih kandidat terbaik atau dokter terima tawaran pekerjaan yang sesuai.</p>
+                            </div>
+                            
+                            <div class="step-arrow">
+                                <i data-lucide="arrow-right"></i>
+                            </div>
+                            
+                            <div class="step-item">
+                                <div class="step-number">4</div>
+                                <div class="step-icon-large"><i data-lucide="file-signature"></i></div>
+                                <h4>Contract</h4>
+                                <p>Kontrak digital otomatis dan pembayaran aman melalui platform terintegrasi.</p>
+                            </div>
+                            
+                            <div class="step-arrow">
+                                <i data-lucide="arrow-right"></i>
+                            </div>
+                            
+                            <div class="step-item">
+                                <div class="step-number">5</div>
+                                <div class="step-icon-large"><i data-lucide="star"></i></div>
+                                <h4>Feedback</h4>
+                                <p>Saling beri rating dan review setelah pekerjaan selesai untuk membangun trust.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="team" class="section">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2>Tim Kami</h2>
+                            <p>Para profesional di balik inovasi MediHub.</p>
+                        </div>
+                        <div class="team-grid">
+                            <div class="team-card">
+                                <div class="team-img">NJ</div>
+                                <div class="team-info">
+                                    <h3>Nita Juniarsih</h3>
+                                    <div class="team-role">Founder / CEO</div>
+                                </div>
+                            </div>
+                            <div class="team-card">
+                                <div class="team-img">FP</div>
+                                <div class="team-info">
+                                    <h3>Fransiska P.A.</h3>
+                                    <div class="team-role">Co-founder / COO</div>
+                                </div>
+                            </div>
+                            <div class="team-card">
+                                <div class="team-img">AM</div>
+                                <div class="team-info">
+                                    <h3>dr. A. Ali Machfud</h3>
+                                    <div class="team-role">Co-founder</div>
+                                </div>
+                            </div>
+                            <div class="team-card">
+                                <div class="team-img">NF</div>
+                                <div class="team-info">
+                                    <h3>Nida Fauziah S.</h3>
+                                    <div class="team-role">COO</div>
+                                </div>
+                            </div>
+                             <div class="team-card">
+                                <div class="team-img">P</div>
+                                <div class="team-info">
+                                    <h3>dr. Purwa</h3>
+                                    <div class="team-role">CTO</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="blog" class="section bg-light">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2>Update Terkini</h2>
+                            <p>Berita seputar regulasi kesehatan dan pengembangan MediHub.</p>
+                        </div>
+                        <div class="blog-grid">
+                            <article class="blog-card">
+                                <div class="blog-thumb" style="background-image: url('https://images.unsplash.com/photo-1576091160550-217358c7e618?auto=format&fit=crop&w=600&q=80');">
+                                    <span class="blog-tag">Regulasi</span>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="blog-meta">
+                                        <span><i data-lucide="calendar" size="14"></i> 10 Des 2025</span>
+                                    </div>
+                                    <h3>Pentingnya Regulatory Sandbox dalam Inovasi Kesehatan</h3>
+                                    <p>Bagaimana MediHub memastikan operasional yang aman, terukur, dan sesuai hukum melalui Regulatory Sandbox...</p>
+                                    <a href="javascript:void(0)" onclick="showBlogDetail('regulasi')" class="blog-link">Baca Selengkapnya <i data-lucide="arrow-right" size="16"></i></a>
+                                </div>
+                            </article>
+                            
+                            <article class="blog-card">
+                                <div class="blog-thumb" style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80');">
+                                    <span class="blog-tag">Teknologi</span>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="blog-meta">
+                                        <span><i data-lucide="calendar" size="14"></i> 08 Des 2025</span>
+                                    </div>
+                                    <h3>Masa Depan Telemedisin dan Dokter Pengganti</h3>
+                                    <p>Integrasi teknologi cloud untuk pemetaan SDM kesehatan di Indonesia dan peran locum...</p>
+                                    <a href="javascript:void(0)" onclick="showBlogDetail('teknologi')" class="blog-link">Baca Selengkapnya <i data-lucide="arrow-right" size="16"></i></a>
+                                </div>
+                            </article>
+                            
+                            <article class="blog-card">
+                                <div class="blog-thumb" style="background-image: url('https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=600&q=80');">
+                                    <span class="blog-tag">Karir</span>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="blog-meta">
+                                        <span><i data-lucide="calendar" size="14"></i> 05 Des 2025</span>
+                                    </div>
+                                    <h3>Tips Sukses Menjadi Dokter Locum Terpercaya</h3>
+                                    <p>Membangun reputasi melalui rating dan review positif di platform MediSub...</p>
+                                    <a href="javascript:void(0)" onclick="showBlogDetail('karir')" class="blog-link">Baca Selengkapnya <i data-lucide="arrow-right" size="16"></i></a>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+            `;
+        }
+
+        function getBlogDetailTemplate(data) {
+            if (!data) {
+                return `
+                    <div class="blog-detail">
+                        <div style="text-align: center; padding: 50px; background: #fef2f2; border: 1px solid #fca5a5; border-radius: 12px;">
+                            <i data-lucide="alert-triangle" color="#ef4444" size="48"></i>
+                            <h2 style="color: #ef4444; margin-top: 20px;">Artikel Tidak Ditemukan</h2>
+                            <p style="color: var(--dark);">ID artikel yang Anda cari tidak valid. Silakan kembali ke halaman utama.</p>
+                            <a href="javascript:void(0)" onclick="showHomePage()" style="margin-top: 20px;" class="btn btn-outline">
+                                <i data-lucide="arrow-left" size="18"></i> Kembali ke Beranda
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }
+
+            return `
+                <section class="blog-detail">
+                    <div class="container">
+                        <div class="blog-header">
+                            <span class="blog-tag">${data.tag}</span>
+                            <h1>${data.title}</h1>
+                            <div class="blog-meta-detail">
+                                <span><i data-lucide="calendar" size="16"></i> ${data.date}</span>
+                                <span><i data-lucide="user" size="16"></i> MediHub Team</span>
+                            </div>
+                        </div>
+                        <div class="blog-image-detail" style="background-image: url('${data.image}')"></div>
+                        <div class="summary-box">
+                            <strong>Ringkasan Singkat:</strong>
+                            <p>${data.summary}</p>
+                        </div>
+                        <div class="blog-body">
+                            ${data.body}
+                        </div>
+                    </div>
+                </section>
+            `;
+        }
+        
+        function showHomePage() {
+            contentContainer.innerHTML = getHomePageTemplate();
+            backToHomeBtn.style.display = 'none';
+            mainNav.style.display = 'block';
+            lucide.createIcons();
+            document.title = "MediSub - Your Medical Match!";
+            window.scrollTo(0, 0); 
+        }
+
+        function showBlogDetail(blogId) {
+            const data = blogData[blogId];
+            contentContainer.innerHTML = getBlogDetailTemplate(data);
+            backToHomeBtn.style.display = 'inline-flex';
+            mainNav.style.display = 'none';
+            lucide.createIcons();
+            document.title = (data ? data.title : 'Artikel Tidak Ditemukan') + ' - MediSub';
+            window.scrollTo(0, 0); 
+        }
+
+        window.onload = () => {
+            showHomePage();
+            
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault(); 
+                console.log('--- SIMULASI PENGIRIMAN DATA FORMULIR ---');
+                this.querySelectorAll('input, textarea').forEach(field => {
+                    console.log(`${field.placeholder}: ${field.value}`);
+                });
+                console.log('-----------------------------------------');
+                this.reset();
+                showModal();
+            });
+            
+            successModal.addEventListener('click', (e) => {
+                if (e.target.id === 'successModal') {
+                    closeModal();
+                }
+            });
+        };
+    </script>
+</body>
+</html>
