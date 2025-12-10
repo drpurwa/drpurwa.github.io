@@ -505,6 +505,12 @@
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: transform 0.3s, box-shadow 0.3s;
+            flex: 1 1 calc(33.33% - 30px);   /* ⭐ atur lebar konsisten */
+            max-width: 300px;                /* ⭐ batas maksimal agar rapi */
+            display: flex;
+            flex-direction: column;          /* ⭐ jaga agar isi rapi */
+        }
+
             
         }
         .team-card:hover {
@@ -974,13 +980,16 @@
                 <div class="contact-form-container">
                     <form class="contact-form" id="contactForm">
                         <h3 style="color:white; margin-bottom:15px; font-size:1.2rem;">Kirim Pesan / Mulai Pendaftaran</h3>
-                        <input type="text" placeholder="Nama Lengkap" required>
-                        <input type="email" placeholder="Email Anda" required>
-                        <input type="tel" placeholder="Nomor HP (cth: 08123xxxxxxx)" required>
-                        <textarea rows="4" placeholder="Ketik Pesan Anda di sini..." required></textarea>
+                
+                        <input type="text" id="nama" placeholder="Nama Lengkap" required>
+                        <input type="email" id="email" placeholder="Email Anda" required>
+                        <input type="tel" id="hp" placeholder="Nomor HP (cth: 08123xxxxxxx)" required>
+                        <textarea rows="4" id="pesan" placeholder="Ketik Pesan Anda di sini..." required></textarea>
+                
                         <button type="submit">Kirim Pesan</button>
                     </form>
                 </div>
+
             </div>
             
             <div style="margin-top: 50px; border-top: 1px solid #334155; padding-top: 20px; text-align: center;">
