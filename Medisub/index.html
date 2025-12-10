@@ -425,6 +425,7 @@
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: transform 0.3s, box-shadow 0.3s;
+            
         }
         .team-card:hover {
             transform: translateY(-5px);
@@ -434,12 +435,13 @@
             width: 100%;
             height: 250px;
             background-size: cover;
-            background-position: center;
+            background-position: center center;
             background-repeat: no-repeat;
-            position: relative;
-}
-
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+        
         .team-info {
             padding: 20px;
             text-align: center;
