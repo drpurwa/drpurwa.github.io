@@ -343,8 +343,9 @@
             justify-content: center;
             gap: 20px;
             flex-wrap: wrap;
-            max-width: 1400px;
-            margin: 0 auto;
+            align-items: flex-start; /* agar row tidak terpaku di tengah */
+            justify-content: center;
+            gap: 20px;
         }
         .step-item {
             text-align: center;
@@ -352,7 +353,7 @@
             background: var(--white);
             border-radius: 15px;
             transition: transform 0.3s;
-            flex: 1 1 220px;
+            flex: 1 1 200px;
             box-shadow: var(--shadow);
             text-align: center;
             min-height: 280px; /* ⬅️ bikin semua card rata tinggi */
