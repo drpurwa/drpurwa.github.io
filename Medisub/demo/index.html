@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediSub - Your Medical Match</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Poppins', 'sans-serif'],
+            },
+            colors: {
+              medisub: {
+                primary: '#2563eb',    // blue-600
+                dark: '#1e40af',       // blue-800
+                secondary: '#0ea5e9',  // sky-500
+                accent: '#f59e0b',     // amber-500
+                slate: '#1e293b'       // slate-800
+              }
+            },
+            animation: {
+              'fade-in-up': 'fadeInUp 0.8s ease-out',
+              'slide-right': 'slideRight 1.5s ease-in-out infinite',
+              'slide-down': 'slideDown 1.5s ease-in-out infinite',
+            },
+            keyframes: {
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(30px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              slideRight: {
+                '0%, 100%': { transform: 'translateX(0)', opacity: '0.6' },
+                '50%': { transform: 'translateX(10px)', opacity: '1' },
+              },
+              slideDown: {
+                 '0%, 100%': { transform: 'rotate(90deg) translateX(0)', opacity: '0.6' },
+                 '50%': { transform: 'rotate(90deg) translateX(10px)', opacity: '1' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+      }
+    </style>
+
+<link rel="stylesheet" href="/index.css">
+  <script type="importmap">
+{
+  "imports": {
+    "vite": "https://esm.sh/vite@^7.2.7",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.33.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.561.0"
+  }
+}
+</script>
+  <script type="module" crossorigin src="./assets/index-BKWURng2.js"></script>
+</head>
+  <body class="bg-slate-50 text-slate-900">
+    <div id="root"></div>
+    <!-- Entry point script for Vite -->
+  </body>
+</html>
